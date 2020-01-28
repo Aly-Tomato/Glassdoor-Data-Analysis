@@ -82,8 +82,34 @@ def execute(isHighlights):
 
         dest.to_csv(output_csv, mode='a', header=False)
 
+def merge(df1, df2):
+    return
+
+def delete_dups():
+    salary_fieldnames = ['gaTrackerData.jobId', 'jobTitle', 'payPeriod', 'payPercentile50', 'payPercentile10', 'payPercentile90']
+    highlight_fieldnames = ['gaTrackerData.jobId', 'icon', 'name', 'highlightPhrase']
+
+    # delete dup highlights
+    check_df = pd.read_csv('glassdoor_usuk_edit_geo.csv')
+    us_df = pd.read_csv('../raw_data/formated_US_highlights.csv')
+    df = pd.read_csv('../raw_data/formatted_UK_benefits_highlights.csv')
+    cond = df['gaTrackerData.jobId'].isin(check_df['gaTrackerData.jobId']) == False
+    df.drop(df[cond].index, inplace=True)
+    df.drop(df.columns[[0, 1]], axis=1, inplace=True)
+    df.to_csv('../raw_data/formatted_usuk_highlights.csv', index=False)
+
+    #delete dup salaries
+    check_df = pd.read_csv('glassdoor_usuk_edit_geo.csv')
+    df = pd.read_csv('../raw_data/formatted_UK_salary_salaries.csv')
+    cond = df['gaTrackerData.jobId'].isin(check_df['gaTrackerData.jobId']) == False
+    df.drop(df[cond].index, inplace=True)
+    df.drop(df.columns[[0, 1]], axis=1, inplace=True)
+    df.to_csv('../raw_data/formatted_usuk_salaries.csv', index=False)
 
 
 if __name__=="__main__":
     #execute(False)
-    filter_salary_columns()
+    #execute(True)
+    #filter_highlights_columns()
+    #filter_salary_columns()
+    delete_dups()
