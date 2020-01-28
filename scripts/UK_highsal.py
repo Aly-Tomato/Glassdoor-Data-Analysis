@@ -6,8 +6,6 @@ This script finds the related jobId and replaces the primary key to better fit o
 import pandas as pd
 import csv
 
-highlight_fieldnames = ['gaTrackerData.jobId', 'icon', 'name', 'highlightPhrase']
-salary_fieldnames = ['gaTrackerData.jobId', 'jobTitle', 'payPeriod', 'payPercentile50', 'payPercentile10', 'payPercentile90']
 
 def cast_to_int(df, columns):
     """
@@ -25,6 +23,32 @@ def get_jobId(id, rel):
 def get_source_row(id, rel):
     a = rel.loc[rel['id'] == id]
     return a
+
+def filter_highlights_columnns():
+    highlight_OG_fieldnames = ['id', 'benefits.highlights.val.icon', 'benefits.highlights.val.name', 'benefits.highlights.val.highlightPhrase']
+    df = pd.read_csv('../raw_data/formatted_UK_benefits_highlights.csv')
+    df = df.rename(columns={'id': 'gaTrackerData.jobId',
+                       'benefits.highlights.val.icon': 'icon',
+                       'benefits.highlights.val.name': 'name',
+                       'benefits.highlights.val.highlightPhrase': 'highlightsPhrase'
+    })
+    del df['benefits.highlights.val.commentCount']
+    df.to_csv('../raw_data/formatted_UK_benefits_highlights.csv')
+
+def filter_salary_columns():
+    salary_fieldnames = ['gaTrackerData.jobId', 'jobTitle', 'payPeriod', 'payPercentile50', 'payPercentile10', 'payPercentile90']
+    df = pd.read_csv('../raw_data/formatted_UK_salary_salaries.csv')
+    df = df.rename(columns={'id': 'gaTrackerData.jobId',
+                            'salary.salaries.val.jobTitle': 'jobTitle',
+                            'salary.salaries.val.payPeriod': 'payPeriod',
+                            'salary.salaries.val.salaryPercentileMap.payPercentile50': 'payPercentile50',
+                            'salary.salaries.val.salaryPercentileMap.payPercentile10': 'payPercentile10',
+                            'salary.salaries.val.salaryPercentileMap.payPercentile90': 'payPercentile90',
+                            })
+    del df['index']
+    del df['salary.salaries.val.basePayCount']
+    del df['salary.salaries.val.salaryType']
+    df.to_csv('../raw_data/formatted_UK_salary_salaries.csv')
 
 def execute(isHighlights):
     if isHighlights:
@@ -61,4 +85,5 @@ def execute(isHighlights):
 
 
 if __name__=="__main__":
-    execute(False)
+    #execute(False)
+    filter_salary_columns()
