@@ -7,19 +7,22 @@ import csv
 import ast
 
 def main():
-    og_csv = pd.read_csv('US_glassdoor.csv')
+    og_csv = pd.read_csv('../raw_data/og_US_glassdoor.csv')
     #drop all completely empty rows from dataframe
     og_csv.dropna()
 
+    # create new csv with only jobid & salaries column
+    keep_col = ['gaTrackerData.jobId', 'salary.salaries']
+    salaries_csv = og_csv[keep_col]
+    #salaries_csv.drop(salaries_csv.columns[0], axis=1, inplace=True)
+    salaries_csv.to_csv('US_salaries.csv', index=False)
+
+    """
     # create new csv with only jobid & highlights columns
     keep_col = ['gaTrackerData.jobId', 'benefits.highlights']
     highlights_csv = og_csv[keep_col]
     highlights_csv.to_csv('US_highlights.csv', index=False)
 
-    # create new csv with only jobid & salaries column
-    keep_col = ['gaTrackerData.jobId', 'salary.salaries']
-    salaries_csv = og_csv[keep_col]
-    salaries_csv.to_csv('US_salaries.csv', index=False)
 
     # create new US_glassdoor.csv with added ISO / currencyCode columns
     tot_rows, cols = og_csv.shape
@@ -29,6 +32,7 @@ def main():
     columns = [m.strip('\n') for m in open('custom_fields.txt').readlines()]
     updated_csv = og_csv[columns]
     updated_csv.to_csv('updated_US_glassdoor.csv')
+    """
 
 def format_highlights():
     """
@@ -97,6 +101,6 @@ def format_salaries():
 
 if __name__ == '__main__':
     main()
-    format_highlights()
+    #format_highlights()
     format_salaries()
 
