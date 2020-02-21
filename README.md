@@ -7,7 +7,7 @@ Analyzes Glassdoor data to identify valuable skills as described in real-world j
 * Tasks Outline: [https://bit.ly/2Rb8JQp](https://bit.ly/2Rb8JQp)
 
 ## Midpoint Report Deliverables
-* [https://docs.google.com/document/d/1HGTzxluqOWFXDtLtGHYdjhkyJofw1k4SzZEl-8Ty1ps/edit?usp=sharing](Midpoint Report)
+* [Midpoint Report](https://docs.google.com/document/d/1HGTzxluqOWFXDtLtGHYdjhkyJofw1k4SzZEl-8Ty1ps/edit?usp=sharing)
 * Tasks Outline: Same as in Project 1
 
 
