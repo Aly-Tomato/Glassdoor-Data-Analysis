@@ -1,0 +1,18 @@
+Tableau
+Wrapper
+FusionCharts
+Qlik
+Google Charts
+Plotly
+Sisense
+Highcharts
+Leaflet
+PowerBI
+Domo
+ChartBlocks
+Polymaps
+Qlik Sense
+Looker
+Salesforce
+Chartio
+Zoho

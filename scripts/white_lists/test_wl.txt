@@ -1,0 +1,7 @@
+Selenium
+TestComplete
+Ranorex
+Appium
+Jenkins
+Katalon
+Eggplant
