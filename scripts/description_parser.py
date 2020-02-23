@@ -16,6 +16,7 @@ desc_file_path = "/Users/chrism/Data_sci/desc.csv"
 class descript:
     def __init__(self, _ID, _wl_list):
         self.ID = _ID
+        self.min_degree = "unknown"
 
         self.lists_cats = {}
         for list_name in _wl_list:
@@ -67,10 +68,14 @@ def load_white_list(wl_names):
 def make_global_count_dict(wl_names):
     global_dict = {}
     for wl_name in wl_names:
-        temp = {wl_name: {}}
+        temp = {wl_name: {'total':0}}
         global_dict.update(temp)
     return global_dict
 
+
+def parse_ed(ed_string):
+    if ed_string == []:
+        return None
 
 def digest(desc,wl_names,wlists, global_counts, job_entry):
     desc = desc.replace('\n',' ')
@@ -80,10 +85,13 @@ def digest(desc,wl_names,wlists, global_counts, job_entry):
         if cur_wl:
             job_entry.add_term(cur_wl,word)
             temp = global_counts[cur_wl]
+            #modify to get total jobs that have not total num of hits in cat
             if temp.get(word) == None:
                 temp[word] = 1
+                temp["total"] += 1
             else:
                 temp[word] += 1
+                temp["total"] += 1
             global_counts[cur_wl] = temp
     return job_entry
 
@@ -97,7 +105,8 @@ def print_global_dict(gd,wl_alias):
     #print(gd)
     idx = 0
     for key, values in gd.items():
-        if gd[key]:
+        temp = gd[key]
+        if temp["total"] > 0:
             #if idx < len(wl_alias) + 1:
             print(wl_alias[idx].upper())
             for words, counts in values.items():
@@ -132,16 +141,17 @@ def main(w_l_names,desc_path, w_l_aliases ):
             desc_entry = row["job.description"]
             if langdetect.detect(desc_entry) == "en":
                 soup = BeautifulSoup(desc_entry, "lxml")
-                experience = soup.find_all(string=re.compile("experience"))
+                experience = soup.find_all(string=re.compile(r'degree|diploma|education'))
+                #print(experience)
                 first_pass = re.sub("[->,\"%#/&$().?'!:*\t\[\]]", ' ', soup.get_text(separator=' '))
                 cur_job = digest(first_pass,w_l_names,white_lists,global_counts,cur_job)
                 entry_list.append(cur_job)
                 count += 1
-            if count % 30 == 0:
+            if count % 300 == 0:
                 break
 
 
-    print_job_entries(entry_list, w_l_aliases)
+    #print_job_entries(entry_list, w_l_aliases)
     print_global_dict(global_counts,w_l_aliases)
 
 
