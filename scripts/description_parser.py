@@ -7,6 +7,10 @@ path = os.getcwd() + "/"
 white_list_names = ["pl_wl1","DB_wl","plaforms_wl","tools_wl",
                     "web_Frame_wl","env_wl","workflow_wl","test_wl", "vis_wl"]
 
+wl_alias_names = ["programming langauges", "databases", "platforms", "misc tools",
+                  "web frameworks","environments","workflow management","Testing Software",
+                "visualization software" ]
+
 desc_file_path = "/Users/chrism/Data_sci/desc.csv"
 
 class descript:
@@ -37,6 +41,12 @@ class descript:
                 outstring += ',"'
                 for words, count in values.items():
                     outstring += words + " "
+                if outstring[-1] == " ":
+                    outstring = outstring[:-1]
+                outstring += '"'
+            print(outstring)
+        else:
+            return None
 
  
 
@@ -75,7 +85,7 @@ def digest(desc,wl_names,wlists, global_counts, job_entry):
             else:
                 temp[word] += 1
             global_counts[cur_wl] = temp
-            
+    return job_entry
 
 
 def check_lists(word,wl_names, white_lists):
@@ -83,16 +93,33 @@ def check_lists(word,wl_names, white_lists):
         if word in white_lists[i]:
             return wl_names[i]
 
-def print_global_dict(gd):
+def print_global_dict(gd,wl_alias):
     #print(gd)
+    idx = 0
     for key, values in gd.items():
         if gd[key]:
-            #print(key)
+            #if idx < len(wl_alias) + 1:
+            print(wl_alias[idx].upper())
             for words, counts in values.items():
                 print(words + "," + str(counts))
+            print("\n")
+        idx += 1
+
+def print_job_entries(job_list, w_l_names):
+    header = "jobid,"
+    #print(job_list)
+    for name in w_l_names:
+        header += name + ","
+
+    print(header[:-1])
+    for job in job_list:
+        out_string = job.print_data()
+        if out_string:
+            print(out_string)
 
 
-def main(w_l_names,desc_path ):
+
+def main(w_l_names,desc_path, w_l_aliases ):
     entry_list = []
     global_counts = make_global_count_dict(w_l_names)
     white_lists = load_white_list(w_l_names)
@@ -107,19 +134,16 @@ def main(w_l_names,desc_path ):
                 soup = BeautifulSoup(desc_entry, "lxml")
                 experience = soup.find_all(string=re.compile("experience"))
                 first_pass = re.sub("[->,\"%#/&$().?'!:*\t\[\]]", ' ', soup.get_text(separator=' '))
-                digest(desc_entry,w_l_names,white_lists,global_counts,cur_job)
+                cur_job = digest(first_pass,w_l_names,white_lists,global_counts,cur_job)
+                entry_list.append(cur_job)
                 count += 1
-            if count % 5 == 0:
+            if count % 30 == 0:
                 break
 
-    header = "jobid,"
-    for name in white_list_names:
-        header += name + ","
-    print(header)
 
-    print_global_dict(global_counts)
+    print_job_entries(entry_list, w_l_aliases)
+    print_global_dict(global_counts,w_l_aliases)
 
 
-
-main(white_list_names,desc_file_path)
+main(white_list_names,desc_file_path,wl_alias_names)
 
