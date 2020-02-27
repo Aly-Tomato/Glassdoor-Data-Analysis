@@ -1,5 +1,5 @@
 [Hh]igh_[Ss]chool|\s[Hh][sS]\s|\s[Hh]\.[sS]\.\s|\sged\s
-associate degree\s|associates degree\s|\s[aA]\.[aA]\.\s
-[Bb]achelor*..|\s[bB][sS]\s|\s[bB]\.[sS]\.\s|BSc\s|[Bb]achelor
+[Aa]ssociate degree\s|[Aa]ssociates degree\s|\s[aA]\.[aA]\.\s|2 year\s*egree
+[Bb]achelor*..|\s[bB][sS]\s|\s[bB]\.[sS]\.\s|BSc\s|[Bb]achelor|[Bb]achelor*..|\s[bB][sS]\s|\s[bB]\.[sS]\.\s|BSc\s|[Bb]achelor|[34][\s-]year\s[Dd]egree
 [Mm]aster[s']|[Mm]\.[Ss]\.|M\.Sc|[Mm]\.[Aa]\.|\s[Mm][Ss] or|[Mm]aster
 Doctorate|PhD|Ph\.d|Doctor
