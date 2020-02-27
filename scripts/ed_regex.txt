@@ -1,5 +1,0 @@
-high school|\s[Hh][sS]\s|\s[Hh]\.[sS]\.\s|\sged\s
-associate degree\s|associates degree\s|\s[aA]\.[aA]\.\s
-bachelor*..|\s[bB][sS]\s|\s[bB]\.[sS]\.\s|BSc\s
-master[s']|[Mm]\.[Ss]\.
-Doctorate|PhD|Ph\.d|Doctor

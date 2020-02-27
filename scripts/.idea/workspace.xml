@@ -4,14 +4,8 @@
     <list default="true" id="06d40133-87da-4cca-850d-bb8afd65cc52" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/description_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/description_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ed_terms.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ed_terms.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/white_lists/DB_wl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/white_lists/DB_wl.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/white_lists/env_wl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/white_lists/env_wl.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ed_regex.txt" beforeDir="false" afterPath="$PROJECT_DIR$/white_lists/ed_regex.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/white_lists/plaforms_wl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/white_lists/plaforms_wl.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/white_lists/tools_wl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/white_lists/tools_wl.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/white_lists/vis_wl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/white_lists/vis_wl.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/white_lists/web_Frame_wl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/white_lists/web_Frame_wl.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/white_lists/workflow_wl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/white_lists/workflow_wl.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,10 +18,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/description_parser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="62" column="39" selection-start-line="62" selection-start-column="39" selection-end-line="62" selection-end-column="39" />
+            <state relative-caret-position="-831">
+              <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/white_lists/ed_regex.txt">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -60,6 +59,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -71,13 +71,17 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/white_lists" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -103,18 +107,19 @@
       <updated>1582411818818</updated>
       <workItem from="1582411820277" duration="9028000" />
       <workItem from="1582762590837" duration="4170000" />
-      <workItem from="1582784398789" duration="189000" />
+      <workItem from="1582784398789" duration="564000" />
+      <workItem from="1582831083509" duration="4068000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13387000" />
+    <option name="totallyTimeSpent" value="17830000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="118" y="64" width="1100" height="763" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2589792" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2637051" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -141,10 +146,13 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/white_lists/ed_regex.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/description_parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="62" column="39" selection-start-line="62" selection-start-column="39" selection-end-line="62" selection-end-column="39" />
+        <state relative-caret-position="-831">
+          <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
         </state>
       </provider>
     </entry>

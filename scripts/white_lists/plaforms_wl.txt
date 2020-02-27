@@ -9,6 +9,7 @@ Raspberry
 WordPress
 iOS
 Google_cloud_platform
+Google_cloud
 GCP
 Azure
 Arduino

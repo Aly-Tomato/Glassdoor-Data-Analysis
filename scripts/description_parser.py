@@ -13,6 +13,8 @@ wl_alias_names = ["programming langauges", "databases", "platforms", "misc tools
 
 desc_file_path = "/Users/chrism/Data_sci/desc.csv"
 
+edu_file = "ed_regex.txt"
+
 class descript:
     def __init__(self, _ID, _wl_list):
         self.ID = _ID
@@ -32,12 +34,16 @@ class descript:
         self.lists_cats[wlist_name] = temp
         self.modified = True
 
+    def change_ed(self,edu):
+        self.min_degree = edu
+
     def get_id(self):
         return self.ID
 
     def print_data(self):
         if self.modified:
             outstring = self.ID
+            outstring+="," + self.min_degree
             for key,values in self.lists_cats.items():
                 outstring += ',"'
                 for words, count in values.items():
@@ -45,7 +51,7 @@ class descript:
                 if outstring[-1] == " ":
                     outstring = outstring[:-1]
                 outstring += '"'
-            print(outstring)
+            return outstring
         else:
             return None
 
@@ -54,7 +60,7 @@ class descript:
 def load_white_list(wl_names):
     list_of_wl = []
     for name in wl_names:
-        file_name = os.getcwd() + "/white_lists/" + name + ".txt"
+        file_name = path + "white_lists/" + name + ".txt"
         wl_set = set()
         wl_file = open(file_name, 'r')
         for line in wl_file:
@@ -63,6 +69,17 @@ def load_white_list(wl_names):
             wl_set.add(str(line.lower()))
         list_of_wl.append(wl_set)
     return list_of_wl
+
+def load_edu(ed_file_name):
+    ed_regexes = []
+    ed_path = path + "white_lists/" + ed_file_name
+    ed_file = open(ed_path, 'r')
+    for line in ed_file:
+        regex = re.compile(line)
+        ed_regexes.append(regex)
+    return ed_regexes
+
+
 
 
 def make_global_count_dict(wl_names):
@@ -77,10 +94,15 @@ def parse_ed(ed_string):
     if ed_string == []:
         return None
 
-def digest(desc,wl_names,wlists, global_counts, job_entry):
+def digest(desc,wl_names,wlists, global_counts, job_entry, edu_regex):
     desc = desc.replace('\n',' ')
     desc_list = desc.split(' ')
+    ed_list = ["High School", "Associates", "Bachelors", "Masters", "PhD"]
     for word in desc_list:
+        ed_code = capture_edu(word,edu_regex)
+        if ed_code >= 0:
+            print(ed_code, ed_list[ed_code], job_entry.get_id())
+            job_entry.change_ed(ed_list[ed_code])
         cur_wl = check_lists(word.lower(),wl_names,wlists)
         if cur_wl:
             job_entry.add_term(cur_wl,word)
@@ -101,6 +123,17 @@ def check_lists(word,wl_names, white_lists):
         if word in white_lists[i]:
             return wl_names[i]
 
+
+def capture_edu(word,ed_reg):
+    if word == "bachelor":
+        print("foo")
+    for i in range(0,len(ed_reg)):
+        if ed_reg[i].match(word.lower()):
+
+            print(word)
+            return i
+    return -1
+
 def print_global_dict(gd,wl_alias):
     #print(gd)
     idx = 0
@@ -115,11 +148,10 @@ def print_global_dict(gd,wl_alias):
         idx += 1
 
 def print_job_entries(job_list, w_l_names):
-    header = "jobid,"
+    header = "jobid,education,"
     #print(job_list)
     for name in w_l_names:
         header += name + ","
-
     print(header[:-1])
     for job in job_list:
         out_string = job.print_data()
@@ -141,7 +173,7 @@ def gen_ed_list(ed_string, ed_cnt):
 
 def print_ed_cnt(ed_cnt):
     for key,values in ed_cnt.items():
-        print(key +"," + str(values))
+        print(key + "," + str(values))
 
 def main(w_l_names,desc_path, w_l_aliases ):
     entry_list = []
@@ -149,6 +181,8 @@ def main(w_l_names,desc_path, w_l_aliases ):
     white_lists = load_white_list(w_l_names)
     count = 0
     ed_count = {}
+    ed_regexes = load_edu(edu_file)
+    #print(ed_regexes[0])
     with open(desc_path, 'r') as csvfile:
         entries = csv.DictReader(csvfile, delimiter=',', quotechar='"')
         for row in entries:
@@ -159,21 +193,23 @@ def main(w_l_names,desc_path, w_l_aliases ):
                 soup = BeautifulSoup(desc_entry, "lxml")
                 experience = soup.find(string=re.compile(r'degree|diploma|education'))
                 if experience:
+                    #print(experience)
                     edu = re.sub("[->,/]", ' ', experience)
-                    edu = re.sub("[->\"%#/&$()?'.!:*\t\[\]]", '', edu)
-                    #print(edu)
-                    ed_count = gen_ed_list(edu,ed_count)
+                    edu = re.sub("[->\"%#/&$()?'!:*\t\[\]]", '', edu)
+                    print(edu)
+
+                    #ed_count = gen_ed_list(edu,ed_count)
                 #print(experience)
                 first_pass = re.sub("[->,\"%#/&$().?'!:*\t\[\]]", ' ', soup.get_text(separator=' '))
-                cur_job = digest(first_pass,w_l_names,white_lists,global_counts,cur_job)
+                cur_job = digest(first_pass,w_l_names,white_lists,global_counts,cur_job,ed_regexes)
                 entry_list.append(cur_job)
                 count += 1
-            if count % 300 == 0:
+            if count % 30 == 0:
                 break
 
 
-    #print_job_entries(entry_list, w_l_aliases)
-    print_global_dict(global_counts,w_l_aliases)
+    print_job_entries(entry_list, w_l_aliases)
+    #print_global_dict(global_counts,w_l_aliases)
     #print_ed_cnt(ed_count)
 
 main(white_list_names,desc_file_path,wl_alias_names)
