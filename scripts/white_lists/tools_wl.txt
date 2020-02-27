@@ -1,5 +1,6 @@
 Node.js
 .NET
+.NET_Core
 Pandas
 Unity
 React
@@ -18,3 +19,5 @@ Chef
 CryEngine
 ETL
 BI
+machine_learning
+Keras

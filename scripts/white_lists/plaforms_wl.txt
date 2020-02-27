@@ -8,7 +8,7 @@ Slack
 Raspberry
 WordPress
 iOS
-Google
+Google_cloud_platform
 GCP
 Azure
 Arduino

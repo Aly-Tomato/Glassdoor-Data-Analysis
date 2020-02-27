@@ -2,7 +2,7 @@ Tableau
 Wrapper
 FusionCharts
 Qlik
-Google Charts
+Google_Charts
 Plotly
 Sisense
 Highcharts

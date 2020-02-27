@@ -60,7 +60,7 @@ def load_white_list(wl_names):
         for line in wl_file:
             line = line.strip()
             #line = line.lower()
-            wl_set.add(str(line))
+            wl_set.add(str(line.lower()))
         list_of_wl.append(wl_set)
     return list_of_wl
 
@@ -81,7 +81,7 @@ def digest(desc,wl_names,wlists, global_counts, job_entry):
     desc = desc.replace('\n',' ')
     desc_list = desc.split(' ')
     for word in desc_list:
-        cur_wl = check_lists(word,wl_names,wlists)
+        cur_wl = check_lists(word.lower(),wl_names,wlists)
         if cur_wl:
             job_entry.add_term(cur_wl,word)
             temp = global_counts[cur_wl]
@@ -131,11 +131,12 @@ def gen_ed_list(ed_string, ed_cnt):
         ed_string = ed_string.replace('\n', ' ')
         ed_list = ed_string.split(' ')
         for word in ed_list:
+            word = word.lower()
             count = ed_cnt.get(word.strip())
             if count == None:
                 ed_cnt[word] = 1
-            # else:
-            # local_dict[word] += 1
+            else:
+                ed_cnt[word] += 1
     return ed_cnt
 
 def print_ed_cnt(ed_cnt):
@@ -157,19 +158,23 @@ def main(w_l_names,desc_path, w_l_aliases ):
             if langdetect.detect(desc_entry) == "en":
                 soup = BeautifulSoup(desc_entry, "lxml")
                 experience = soup.find(string=re.compile(r'degree|diploma|education'))
-                ed_count = gen_ed_list(experience,ed_count)
+                if experience:
+                    edu = re.sub("[->,/]", ' ', experience)
+                    edu = re.sub("[->\"%#/&$()?'.!:*\t\[\]]", '', edu)
+                    #print(edu)
+                    ed_count = gen_ed_list(edu,ed_count)
                 #print(experience)
                 first_pass = re.sub("[->,\"%#/&$().?'!:*\t\[\]]", ' ', soup.get_text(separator=' '))
                 cur_job = digest(first_pass,w_l_names,white_lists,global_counts,cur_job)
                 entry_list.append(cur_job)
                 count += 1
-            #if count % 300 == 0:
-                #break
+            if count % 300 == 0:
+                break
 
 
     #print_job_entries(entry_list, w_l_aliases)
-    #print_global_dict(global_counts,w_l_aliases)
-    print_ed_cnt(ed_count)
+    print_global_dict(global_counts,w_l_aliases)
+    #print_ed_cnt(ed_count)
 
 main(white_list_names,desc_file_path,wl_alias_names)
 

@@ -1,11 +1,11 @@
 Wrike
 Asana
-Comindware Tracker
+Comindware_Tracker
 Smartsheet
 Trello
 ProWorkflow
 JIRA
 Pipefy
-Processmaker Inc.
+Processmaker_Inc.
 Workfront
 Functionfox
