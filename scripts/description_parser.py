@@ -126,13 +126,28 @@ def print_job_entries(job_list, w_l_names):
         if out_string:
             print(out_string)
 
+def gen_ed_list(ed_string, ed_cnt):
+    if ed_string:
+        ed_string = ed_string.replace('\n', ' ')
+        ed_list = ed_string.split(' ')
+        for word in ed_list:
+            count = ed_cnt.get(word.strip())
+            if count == None:
+                ed_cnt[word] = 1
+            # else:
+            # local_dict[word] += 1
+    return ed_cnt
 
+def print_ed_cnt(ed_cnt):
+    for key,values in ed_cnt.items():
+        print(key +"," + str(values))
 
 def main(w_l_names,desc_path, w_l_aliases ):
     entry_list = []
     global_counts = make_global_count_dict(w_l_names)
     white_lists = load_white_list(w_l_names)
     count = 0
+    ed_count = {}
     with open(desc_path, 'r') as csvfile:
         entries = csv.DictReader(csvfile, delimiter=',', quotechar='"')
         for row in entries:
@@ -141,19 +156,20 @@ def main(w_l_names,desc_path, w_l_aliases ):
             desc_entry = row["job.description"]
             if langdetect.detect(desc_entry) == "en":
                 soup = BeautifulSoup(desc_entry, "lxml")
-                experience = soup.find_all(string=re.compile(r'degree|diploma|education'))
+                experience = soup.find(string=re.compile(r'degree|diploma|education'))
+                ed_count = gen_ed_list(experience,ed_count)
                 #print(experience)
                 first_pass = re.sub("[->,\"%#/&$().?'!:*\t\[\]]", ' ', soup.get_text(separator=' '))
                 cur_job = digest(first_pass,w_l_names,white_lists,global_counts,cur_job)
                 entry_list.append(cur_job)
                 count += 1
-            if count % 300 == 0:
-                break
+            #if count % 300 == 0:
+                #break
 
 
     #print_job_entries(entry_list, w_l_aliases)
-    print_global_dict(global_counts,w_l_aliases)
-
+    #print_global_dict(global_counts,w_l_aliases)
+    print_ed_cnt(ed_count)
 
 main(white_list_names,desc_file_path,wl_alias_names)
 
