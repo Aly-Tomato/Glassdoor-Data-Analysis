@@ -4,7 +4,7 @@ import langdetect
 
 path = os.getcwd() + "/"
 
-white_list_names = ["pl_wl","DB_wl","plaforms_wl","tools_wl",
+white_list_names = ["pl_wl","DB_wl","platforms_wl","tools_wl",
                     "web_Frame_wl","env_wl","workflow_wl","test_wl", "vis_wl"]
 
 wl_alias_names = ["programming langauges", "databases", "platforms", "misc tools",
@@ -69,7 +69,7 @@ def load_white_list(wl_names):
         wl_file = open(file_name, 'r')
         for line in wl_file:
             line = line.strip()
-            #line = line.lower()
+            line = line.lower()
             wl_set.add(str(line.lower()))
         list_of_wl.append(wl_set)
     return list_of_wl
@@ -97,23 +97,32 @@ def make_global_count_dict(wl_names):
 
 def digest(desc,wl_names,wlists, global_counts, job_entry):
     desc = desc.replace('\n',' ')
+    desc = desc.lower()
     desc_list = desc.split(' ')
-
+    total_list = [False]*len(wl_names)
     for word in desc_list:
 
         cur_wl = check_lists(word.lower(),wl_names,wlists)
+
         if cur_wl:
-            
+            idx = wl_names.index(cur_wl)
+            total_list[idx] = True
             job_entry.add_term(cur_wl,word)
             temp = global_counts[cur_wl]
-            #modify to get total jobs that have not total num of hits in cat
             if temp.get(word) == None:
                 temp[word] = 1
-                temp["total"] += 1
+                found_on_list = True
             else:
                 temp[word] += 1
-                temp["total"] += 1
+                found_on_list = True
             global_counts[cur_wl] = temp
+
+            total_list[idx] = True
+    for i in range(0,len(wlists)):
+        if total_list[i]:
+            cur_wl = wl_names[idx]
+            temp = global_counts[cur_wl]
+            temp["total"] += 1
     return job_entry
 
 
@@ -152,6 +161,20 @@ def print_global_dict(gd,wl_alias):
             for words, counts in values.items():
                 print(words + "," + str(counts))
             print("\n")
+        idx += 1
+
+def write_global_dict(gd, wl_alias):
+    idx = 0
+
+    for key, values in gd.items():
+        temp = gd[key]
+        #print(key)
+        if temp["total"] > 0:
+            out_file = open(path + "/count_data/" + key[:-3] +"_count.txt", 'x')
+            # if idx < len(wl_alias) + 1:
+            out_file.write(wl_alias[idx].upper() +"\n")
+            for words, counts in values.items():
+                out_file.write(words + "," + str(counts) +"\n")
         idx += 1
 
 def print_job_entries(job_list, w_l_names):
@@ -228,9 +251,11 @@ def main(w_l_names,desc_path, w_l_aliases ):
 
 
     #print_job_entries(entry_list, w_l_aliases)
-    write_job_entries(entry_list,w_l_aliases,out_file_name)
+    #write_job_entries(entry_list,w_l_aliases,out_file_name)
+    write_global_dict(global_counts,w_l_aliases)
     #print_global_dict(global_counts,w_l_aliases)
     #print_ed_cnt(ed_count)
 
 main(white_list_names,desc_file_path,wl_alias_names)
+
 
