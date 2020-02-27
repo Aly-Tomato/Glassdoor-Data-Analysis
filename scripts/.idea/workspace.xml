@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06d40133-87da-4cca-850d-bb8afd65cc52" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/description_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/description_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements_table.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/white_lists/plaforms_wl.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/description_parser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3192">
-              <caret line="261" lean-forward="true" selection-start-line="261" selection-end-line="261" />
+            <state relative-caret-position="324">
+              <caret line="264" column="25" selection-start-line="264" selection-start-column="25" selection-end-line="264" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -107,12 +106,12 @@
       <workItem from="1582411820277" duration="9028000" />
       <workItem from="1582762590837" duration="4170000" />
       <workItem from="1582784398789" duration="564000" />
-      <workItem from="1582831083509" duration="9742000" />
+      <workItem from="1582831083509" duration="11575000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23504000" />
+    <option name="totallyTimeSpent" value="25337000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="118" y="64" width="1100" height="763" extended-state="0" />
@@ -150,8 +149,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/description_parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3192">
-          <caret line="261" lean-forward="true" selection-start-line="261" selection-end-line="261" />
+        <state relative-caret-position="324">
+          <caret line="264" column="25" selection-start-line="264" selection-start-column="25" selection-end-line="264" selection-end-column="25" />
         </state>
       </provider>
     </entry>

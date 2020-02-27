@@ -100,13 +100,14 @@ def digest(desc,wl_names,wlists, global_counts, job_entry):
     desc = desc.lower()
     desc_list = desc.split(' ')
     total_list = [False]*len(wl_names)
+    found_words = set()
     for word in desc_list:
 
         cur_wl = check_lists(word.lower(),wl_names,wlists)
-
         if cur_wl:
-            idx = wl_names.index(cur_wl)
-            total_list[idx] = True
+
+            found_words.add((cur_wl,word.lower()))
+            '''
             job_entry.add_term(cur_wl,word)
             temp = global_counts[cur_wl]
             if temp.get(word) == None:
@@ -118,11 +119,27 @@ def digest(desc,wl_names,wlists, global_counts, job_entry):
             global_counts[cur_wl] = temp
 
             total_list[idx] = True
-    for i in range(0,len(wlists)):
-        if total_list[i]:
-            cur_wl = wl_names[idx]
-            temp = global_counts[cur_wl]
-            temp["total"] += 1
+            '''
+    if found_words:
+        found_list = list(found_words)
+        for found in found_list:
+            job_entry.add_term(found[0], found[1])
+            temp = global_counts[found[0]]
+            #print(found[0])
+            if temp.get(found[1])== None:
+                temp[ found[1]] = 1
+            else:
+                temp[ found[1]] += 1
+
+            global_counts[found[0]] = temp
+            idx = wl_names.index(found[0])
+            total_list[idx] = True
+
+        for i in range(0,len(wlists)):
+            if total_list[i]:
+                cur_wl = wl_names[i]
+                temp = global_counts[cur_wl]
+                temp["total"] += 1
     return job_entry
 
 
@@ -245,14 +262,14 @@ def main(w_l_names,desc_path, w_l_aliases ):
                 cur_job = digest(first_pass,w_l_names,white_lists,global_counts,cur_job)
                 entry_list.append(cur_job)
                 count += 1
-            if count % 1000 == 0:
-                print(str(count) + " number of records parsed")
-                #break
+            if count % 50 == 0:
+                #print(str(count) + " number of records parsed")
+                break
 
 
-    #print_job_entries(entry_list, w_l_aliases)
+    print_job_entries(entry_list, w_l_aliases)
     #write_job_entries(entry_list,w_l_aliases,out_file_name)
-    write_global_dict(global_counts,w_l_aliases)
+    #write_global_dict(global_counts,w_l_aliases)
     #print_global_dict(global_counts,w_l_aliases)
     #print_ed_cnt(ed_count)
 
