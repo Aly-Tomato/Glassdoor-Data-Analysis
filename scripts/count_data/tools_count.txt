@@ -1,0 +1,21 @@
+MISC TOOLS
+total,14363
+machine_learning,6506
+etl,2313
+chef,803
+hadoop,2488
+bi,2551
+react,2447
+ansible,1166
+spark,2865
+pandas,607
+unity,190
+pytorch,508
+tensorflow,1131
+keras,502
+torch,100
+unreal,47
+cryengine,2
+cordova,41
+xamarin,59
+flutter,21

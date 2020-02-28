@@ -1,0 +1,17 @@
+VISUALIZATION SOFTWARE
+total,4027
+looker,280
+qlik,310
+sisense,27
+tableau,2478
+leaflet,23
+plotly,45
+salesforce,1224
+domo,57
+powerbi,432
+chartio,11
+highcharts,22
+wrapper,18
+zoho,4
+google_charts,2
+fusioncharts,1

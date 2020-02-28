@@ -1,0 +1,16 @@
+DATABASES
+total,15154
+sql,11732
+mongodb,1186
+oracle,3094
+cassandra,871
+redis,728
+postgresql,1173
+mysql,2298
+dynamodb,419
+couchbase,95
+microsoft_sql_server,505
+elasticsearch,815
+sqlite,39
+mariadb,132
+firebase,45

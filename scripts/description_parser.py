@@ -105,21 +105,7 @@ def digest(desc,wl_names,wlists, global_counts, job_entry):
 
         cur_wl = check_lists(word.lower(),wl_names,wlists)
         if cur_wl:
-
             found_words.add((cur_wl,word.lower()))
-            '''
-            job_entry.add_term(cur_wl,word)
-            temp = global_counts[cur_wl]
-            if temp.get(word) == None:
-                temp[word] = 1
-                found_on_list = True
-            else:
-                temp[word] += 1
-                found_on_list = True
-            global_counts[cur_wl] = temp
-
-            total_list[idx] = True
-            '''
     if found_words:
         found_list = list(found_words)
         for found in found_list:
@@ -234,6 +220,30 @@ def print_ed_cnt(ed_cnt):
     for key,values in ed_cnt.items():
         print(key + "," + str(values))
 
+
+def gen_one_hot_header(wlist):
+    header = ["jobid"]
+    for term in wlist:
+        header.append(term)
+    return header
+
+def job_onehot(job,wl,one_hots):
+    header = one_hots
+    print(header)
+
+
+def process_one_hot(all_jobs,w_lists,wl_names):
+    one_hots = [] * len(w_lists)
+    for lists in w_lists:
+        one_hots.append(gen_one_hot_header(lists))
+    for job in all_jobs:
+        job_onehot(job,wl_names,one_hots)
+
+
+
+
+
+
 def main(w_l_names,desc_path, w_l_aliases ):
     entry_list = []
     global_counts = make_global_count_dict(w_l_names)
@@ -241,7 +251,7 @@ def main(w_l_names,desc_path, w_l_aliases ):
     count = 0
     ed_count = {}
     ed_regexes = load_edu(edu_file)
-    #print(ed_regexes[0])
+    #print(ed_regexes[0]
     with open(desc_path, 'r') as csvfile:
         entries = csv.DictReader(csvfile, delimiter=',', quotechar='"')
         for row in entries:
@@ -262,12 +272,12 @@ def main(w_l_names,desc_path, w_l_aliases ):
                 cur_job = digest(first_pass,w_l_names,white_lists,global_counts,cur_job)
                 entry_list.append(cur_job)
                 count += 1
-            if count % 50 == 0:
-                #print(str(count) + " number of records parsed")
+            if count % 1 == 0:
+                print(str(count) + " number of records parsed")
                 break
 
-
-    print_job_entries(entry_list, w_l_aliases)
+    process_one_hot(entry_list,white_lists,w_l_names)
+    #print_job_entries(entry_list, w_l_aliases)
     #write_job_entries(entry_list,w_l_aliases,out_file_name)
     #write_global_dict(global_counts,w_l_aliases)
     #print_global_dict(global_counts,w_l_aliases)

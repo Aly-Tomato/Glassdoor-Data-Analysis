@@ -1,0 +1,9 @@
+TESTING SOFTWARE
+total,2286
+selenium,680
+jenkins,1851
+appium,89
+katalon,3
+ranorex,13
+testcomplete,7
+eggplant,13
