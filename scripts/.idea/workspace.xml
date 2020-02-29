@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06d40133-87da-4cca-850d-bb8afd65cc52" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/description_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/description_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/white_lists/pl_wl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/white_lists/pl_wl.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/description_parser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="235" column="15" lean-forward="true" selection-start-line="235" selection-start-column="15" selection-end-line="235" selection-end-column="15" />
+            <state relative-caret-position="415">
+              <caret line="273" column="8" selection-start-line="273" selection-start-column="8" selection-end-line="273" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -47,8 +45,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="118" />
-    <option name="y" value="64" />
+    <option name="x" value="375" />
+    <option name="y" value="28" />
     <option name="width" value="1100" />
     <option name="height" value="763" />
   </component>
@@ -108,15 +106,15 @@
       <workItem from="1582762590837" duration="4170000" />
       <workItem from="1582784398789" duration="564000" />
       <workItem from="1582831083509" duration="11978000" />
-      <workItem from="1582922847230" duration="2371000" />
+      <workItem from="1582922847230" duration="5590000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28111000" />
+    <option name="totallyTimeSpent" value="31330000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="118" y="64" width="1100" height="763" extended-state="0" />
+    <frame x="375" y="28" width="1100" height="763" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.268431" />
@@ -148,8 +146,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/description_parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="235" column="15" lean-forward="true" selection-start-line="235" selection-start-column="15" selection-end-line="235" selection-end-column="15" />
+        <state relative-caret-position="415">
+          <caret line="273" column="8" selection-start-line="273" selection-start-column="8" selection-end-line="273" selection-end-column="8" />
         </state>
       </provider>
     </entry>

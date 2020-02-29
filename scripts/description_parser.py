@@ -44,6 +44,13 @@ class descript:
     def get_id(self):
         return self.ID
 
+    def get_list(self,category):
+        items_list = self.lists_cats[category]
+        fields = []
+        for key,value in items_list.items():
+            fields.append(key)
+        return fields
+
     def print_data(self):
         if self.modified:
             outstring = self.ID
@@ -58,6 +65,7 @@ class descript:
             return outstring
         else:
             return None
+
 
  
 
@@ -227,17 +235,51 @@ def gen_one_hot_header(wlist):
         header.append(term)
     return header
 
-def job_onehot(job,wl,one_hots):
-    header = one_hots
-    print(header)
+def gen_hash_index(wl):
+    idx = 1
+    hash_idx = {}
+    for word in wl:
+        hash_idx[word] = idx
+        idx += 1
+    return hash_idx
 
 
 def process_one_hot(all_jobs,w_lists,wl_names):
-    one_hots = [] * len(w_lists)
-    for lists in w_lists:
-        one_hots.append(gen_one_hot_header(lists))
-    for job in all_jobs:
-        job_onehot(job,wl_names,one_hots)
+
+    #one_hots = [] * len(w_lists)
+    wl_name_idx = 0
+
+    # for each whitelist
+    for list in w_lists:
+        cur_one_hot = []
+        # generate header
+        header = gen_one_hot_header(list)
+        cur_one_hot.append(header)
+        #one_hots.append()
+        # create index_hash
+        cur_hi = gen_hash_index(list)
+        for cur_job in all_jobs:
+            # get fields from job for specific list
+            field_list = cur_job.get_list(wl_names[wl_name_idx])
+            if field_list:
+                # create lists of 0s
+                cur_row = [0]*(len(list) + 1)
+                cur_row[0] = cur_job.get_id()
+                print(field_list)
+                # use indexes from index_hash to
+                for field in field_list:
+                    print(field)
+                    #print(cur_hi)
+                    temp = cur_hi[field]
+                    cur_row[temp] = 1
+                cur_one_hot.append(cur_row)
+        wl_name_idx += 1
+        print(cur_one_hot)
+
+
+
+
+
 
 
 
@@ -272,7 +314,7 @@ def main(w_l_names,desc_path, w_l_aliases ):
                 cur_job = digest(first_pass,w_l_names,white_lists,global_counts,cur_job)
                 entry_list.append(cur_job)
                 count += 1
-            if count % 1 == 0:
+            if count % 5 == 0:
                 print(str(count) + " number of records parsed")
                 break
 
