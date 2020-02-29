@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/description_parser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="273" column="8" selection-start-line="273" selection-start-column="8" selection-end-line="273" selection-end-column="8" />
+            <state relative-caret-position="324">
+              <caret line="335" column="26" selection-start-line="335" selection-start-column="26" selection-end-line="335" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -106,12 +106,12 @@
       <workItem from="1582762590837" duration="4170000" />
       <workItem from="1582784398789" duration="564000" />
       <workItem from="1582831083509" duration="11978000" />
-      <workItem from="1582922847230" duration="5590000" />
+      <workItem from="1582922847230" duration="6441000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31330000" />
+    <option name="totallyTimeSpent" value="32181000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="375" y="28" width="1100" height="763" extended-state="0" />
@@ -146,8 +146,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/description_parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="273" column="8" selection-start-line="273" selection-start-column="8" selection-end-line="273" selection-end-column="8" />
+        <state relative-caret-position="324">
+          <caret line="335" column="26" selection-start-line="335" selection-start-column="26" selection-end-line="335" selection-end-column="26" />
         </state>
       </provider>
     </entry>

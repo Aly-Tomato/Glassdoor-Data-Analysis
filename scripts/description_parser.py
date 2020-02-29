@@ -265,20 +265,39 @@ def process_one_hot(all_jobs,w_lists,wl_names):
                 # create lists of 0s
                 cur_row = [0]*(len(list) + 1)
                 cur_row[0] = cur_job.get_id()
-                print(field_list)
+                #print(field_list)
                 # use indexes from index_hash to
                 for field in field_list:
-                    print(field)
+                    #print(field)
                     #print(cur_hi)
                     temp = cur_hi[field]
                     cur_row[temp] = 1
                 cur_one_hot.append(cur_row)
+        write_onehot(cur_one_hot,wl_names[wl_name_idx])
         wl_name_idx += 1
-        print(cur_one_hot)
 
 
 
+def write_onehot(one_hot,out_f_name):
 
+    out_file = open(path +"/onehots/" +out_f_name[:-3] +"_one_hots.csv", 'x')
+
+    for row in range(0,len(one_hot)):
+        out_str = ""
+        for word in one_hot[row]:
+            out_str += str(word) + ","
+        out_str = out_str[:-1] + "\n"
+        out_file.write(out_str)
+
+    '''
+    for name in w_l_names:
+        header += name + ","
+    out_file.write(header[:-1] +"\n")
+    for job in job_list:
+        out_string = job.print_data()
+        if out_string:
+            out_file.write(out_string+"\n")
+'''
 
 
 
@@ -314,9 +333,9 @@ def main(w_l_names,desc_path, w_l_aliases ):
                 cur_job = digest(first_pass,w_l_names,white_lists,global_counts,cur_job)
                 entry_list.append(cur_job)
                 count += 1
-            if count % 5 == 0:
+            if count % 1000 == 0:
                 print(str(count) + " number of records parsed")
-                break
+                #break
 
     process_one_hot(entry_list,white_lists,w_l_names)
     #print_job_entries(entry_list, w_l_aliases)
